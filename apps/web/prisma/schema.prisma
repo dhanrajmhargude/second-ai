@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  
+}
+enum NoteType {
+  TEXT
+  VOICE
+  IMAGE
+  PDF
+  LINK
+}
+
+model User {
+  id  Int  @id @default(autoincrement())
+  name String 
+  email String @unique
+  password String
+  notes  Note[]
+}
+
+model Note{
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  type NoteType
+  textcontent String?
+  resourceurl String?
+  lastAccessedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userID Int
+  user User @relation(fields: [userID] ,references: [id])
+}
