@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
         }
       );
     }
-
+    
     const { fullName, email, password } = result.data;
 
     const existingUser = await prisma.user.findUnique({
