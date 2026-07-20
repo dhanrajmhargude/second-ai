@@ -16,3 +16,11 @@ export const signupSchema = z.object({
     message: "Password doesn't Match ",
     path:["confirmPassword"]
 })
+
+export const signinSchema = z.object({
+    email : z.email(),
+    password :z.string().min(8,"passowrd must be atleast 8 character ").regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.#^()_+\-=\[\]{};':"\\|,.<>\/?]).+$/,
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+    ),
+})
